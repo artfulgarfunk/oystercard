@@ -14,14 +14,12 @@ class OysterCard
   end
 
   def top_up(amount)
-    msg = "Attempted to top up beyond max value of £#{MAX_BALANCE}.00"
-    raise msg if balance + amount > MAX_BALANCE
+    raise "Attempted to top up beyond max value of £#{MAX_BALANCE}.00" if balance + amount > MAX_BALANCE
     @balance += amount
   end
 
   def touch_in(entry_station)
-    msg = "Insufficient funds"
-    raise msg if balance < MIN_JOURNEY_FUND
+    raise "Insufficient funds" if balance < MIN_JOURNEY_FUND
     deduct if @touched_in == true
     (@journey = Journey.new).start(entry_station)
     @touched_in = true

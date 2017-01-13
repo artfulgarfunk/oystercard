@@ -2,6 +2,7 @@
 class Journey
   attr_accessor :entry_station, :exit_station
   MIN_FARE = 1
+  PENALTY = 6
 
   def initialize(entry_station = nil,exit_station = nil)
     @entry_station = entry_station
@@ -20,7 +21,11 @@ class Journey
   end
 
   def fare
-    MIN_FARE
+    if @entry_station == nil || @exit_station == nil
+      PENALTY
+    else
+      MIN_FARE
+    end 
   end
 
   def complete?

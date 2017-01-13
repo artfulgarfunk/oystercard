@@ -11,4 +11,5 @@ describe Station do
   it "has a name" do
     expect(subject.name).to eq "Victoria"
   end
+
 end

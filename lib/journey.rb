@@ -4,7 +4,7 @@ class Journey
   MIN_FARE = 1
   PENALTY = 6
 
-  def initialize(entry_station = nil,exit_station = nil)
+  def initialize(entry_station = nil, exit_station = nil)
     @entry_station = entry_station
     @exit_station = exit_station
     @journey = Hash.new
@@ -21,7 +21,7 @@ class Journey
   end
 
   def fare
-    complete? ? MIN_FARE : PENALTY 
+    complete? ? MIN_FARE : PENALTY
   end
 
   # def in_journey?

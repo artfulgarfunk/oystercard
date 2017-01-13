@@ -2,44 +2,38 @@ require './lib/journey.rb'
 require './lib/station.rb'
 
 class OysterCard
-  attr_accessor :balance, :max_balance, :entry_station, :exit_station, :journey, :journey_history
+  attr_accessor :balance, :journey, :journey_history
 
   MAX_BALANCE = 90
   MIN_JOURNEY_FUND = 1
-  FARE = 5
 
   def initialize
     @balance = 0
-    @max_balance = MAX_BALANCE
     @journey_history = []
   end
 
   def top_up(amount)
-    msg = "Attempted to top up beyond max value of £#{max_balance}.00"
-    raise msg if balance + amount > max_balance
+    msg = "Attempted to top up beyond max value of £#{MAX_BALANCE}.00"
+    raise msg if balance + amount > MAX_BALANCE
     @balance += amount
   end
 
   def touch_in(entry_station)
     msg = "Insufficient funds"
     raise msg if balance < MIN_JOURNEY_FUND
-    journey = Journey.new(entry_station)
-    #@journey = Hash.new
-    #@entry_station = entry_station
-    #journey[:entry_station] = entry_station
+    @journey = Journey.new
+    @journey.start(entry_station)
   end
 
   def touch_out(exit_station)
-    deduct(FARE)
-    @entry_station = nil
-    journey[:exit_station] = exit_station
-    journey_history << journey
-    exit_station
+    @journey.finish(exit_station)
+    deduct(MIN_JOURNEY_FUND)
+    @journey_history << @journey
   end
 
-  def in_journey?
-    !!@entry_station
-  end
+  # def in_journey?
+  #   !!@entry_station
+  # end
 
   private
   attr_accessor :deduct

@@ -44,5 +44,20 @@ describe Journey do
 
     end
 
+    describe "#complete?" do
+
+      it "returns journey as complete if touched in and touched out" do
+        subject.start(:entry_station)
+        subject.finish(:exit_station)
+        expect(subject).to be_complete
+      end
+
+      it "returns journey as not complete if neither touched in nor touched out" do
+        subject.start(:entry_station)
+        expect(subject).not_to be_complete
+      end
+
+    end
+
 
 end

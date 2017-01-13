@@ -1,4 +1,5 @@
-
+require './lib/journey.rb'
+require './lib/station.rb'
 
 class OysterCard
   attr_accessor :balance, :max_balance, :entry_station, :exit_station, :journey, :journey_history
@@ -22,9 +23,10 @@ class OysterCard
   def touch_in(entry_station)
     msg = "Insufficient funds"
     raise msg if balance < MIN_JOURNEY_FUND
-    @journey = Hash.new
-    @entry_station = entry_station
-    journey[:entry_station] = entry_station
+    journey = Journey.new(entry_station)
+    #@journey = Hash.new
+    #@entry_station = entry_station
+    #journey[:entry_station] = entry_station
   end
 
   def touch_out(exit_station)

@@ -69,44 +69,44 @@ require 'oyster_card'
         expect(subject.journey[:entry_station]).to eq entry_station
       end
     end
-  
 
-    describe "#touch_out" do
-      before do
-        subject.top_up(20)
-        subject.touch_in(entry_station)
-      end
 
-      context "when you finish your journey" do
-        it "changes your journey status" do
-          subject.touch_out(exit_station)
-          expect(subject).not_to be_in_journey
-        end
-
-        it "deducts from your balance" do
-          expect{subject.touch_out(exit_station)}.to change{subject.balance}.by(-5)
-        end
-
-        it "deletes entry station" do
-          subject.touch_out(exit_station)
-          expect(subject.entry_station).to eq nil
-        end
-
-        it "remembers the station" do
-          expect(subject.touch_out(exit_station)).to eq exit_station
-        end
-
-        it "stores the exit_station" do
-          subject.touch_out(exit_station)
-          expect(subject.journey[:exit_station]).to eq exit_station
-        end
-
-        it "stores the whole journey" do
-          subject.touch_out(exit_station)
-          expect(subject.journey_history).to include subject.journey
-        end
-
-      end
-    end
+    # describe "#touch_out" do
+    #   before do
+    #     subject.top_up(20)
+    #     subject.touch_in(entry_station)
+    #   end
+    #
+    #   context "when you finish your journey" do
+    #     it "changes your journey status" do
+    #       subject.touch_out(exit_station)
+    #       expect(subject).not_to be_in_journey
+    #     end
+    #
+    #     it "deducts from your balance" do
+    #       expect{subject.touch_out(exit_station)}.to change{subject.balance}.by(-5)
+    #     end
+    #
+    #     it "deletes entry station" do
+    #       subject.touch_out(exit_station)
+    #       expect(subject.entry_station).to eq nil
+    #     end
+    #
+    #     it "remembers the station" do
+    #       expect(subject.touch_out(exit_station)).to eq exit_station
+    #     end
+    #
+    #     it "stores the exit_station" do
+    #       subject.touch_out(exit_station)
+    #       expect(subject.journey[:exit_station]).to eq exit_station
+    #     end
+    #
+    #     it "stores the whole journey" do
+    #       subject.touch_out(exit_station)
+    #       expect(subject.journey_history).to include subject.journey
+    #     end
+    #
+    #   end
+    # end
 
 end
